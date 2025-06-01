@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime 
 from lib.power_api import PowerAPI
-from util import pm_ops
+from lib.util import pm_ops
 
 def fetch_weather_data(latitude, longitude, start_date, end_date):
     """Fetch weather data from NASA Power API"""
@@ -27,11 +27,14 @@ def reformat_climate_data(weather_df, start_date):
     periods = len(weather_df)
     date_range = pd.date_range(start=formatted_start_date, periods=periods, freq='D')
     
+    # Transform datetime to the latest year so daily climate update is easier
+    yr_gap = datetime.now().year - date_range[-1].year
+    updated_date_range = date_range.map(lambda dt: dt.replace(year=dt.year + yr_gap))
     
     climate = pd.DataFrame({
-        'Day': date_range.day,
-        'Month': date_range.month,
-        'Year': date_range.year,
+        'Day': updated_date_range.day,
+        'Month': updated_date_range.month,
+        'Year': updated_date_range.year,
         'MinTemp': weather_df['T2M_MIN'],
         'MaxTemp': weather_df['T2M_MAX'],
         'Precipitation': weather_df['PRECTOTCORR'],

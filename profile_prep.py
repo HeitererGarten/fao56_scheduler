@@ -22,7 +22,7 @@ from iot_extra.lib.weather_prep import (
     reformat_climate_data
     )
 
-def main():
+def profile_prep():
     # Load config
     conf = load_configuration()
     
@@ -45,4 +45,4 @@ def main():
     soil_client.get_data()
 
 if __name__ == '__main__':
-    main()
+    profile_prep()
