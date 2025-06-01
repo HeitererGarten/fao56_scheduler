@@ -1,0 +1,13 @@
+# Configuration
+
+# -------- Location --------
+# Location in latitude and longitude coordinates
+lat: 11.6845
+lon: 108.1990
+
+# Format: YYYYMMDD
+start_date: 20220101
+
+# Format: YYYYMMDD
+end_date: 20231231
+
