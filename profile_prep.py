@@ -16,7 +16,7 @@ from lib.util import (
     save_data, 
     load_configuration
     )
-from iot_extra.lib.weather_prep import (
+from lib.weather_prep import (
     fetch_weather_data, 
     clean_weather_data, 
     reformat_climate_data
