@@ -29,6 +29,7 @@ def reformat_climate_data(weather_df, start_date):
     
     # Transform datetime to the latest year so daily climate update is easier
     yr_gap = datetime.now().year - date_range[-1].year
+    # Edit-on-self is ill-advised, hence the copied df
     updated_date_range = date_range.map(lambda dt: dt.replace(year=dt.year + yr_gap))
     
     climate = pd.DataFrame({
