@@ -24,17 +24,17 @@ from lib.weather_prep import (
     )
 
 # Define module-level paths, assuming this script is in 'iot_extra'
-# and data files are in 'iot_extra/db/'
+# and data files are in 'iot_extra\db\'
 MODULE_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_WEATHER_REL_PATH = "db/climate_data.txt"
-DEFAULT_SOIL_REL_PATH = "db/soil_data.csv"
-RAW_WEATHER_REL_PATH = "db/raw_weather_df.csv"
+DEFAULT_WEATHER_REL_PATH = r"db\climate_data.txt"
+DEFAULT_SOIL_REL_PATH = r"db\soil_data.csv"
+RAW_WEATHER_REL_PATH = r"db\raw_weather_df.csv"
 
 def profile_prep():
     climate_output_abs_path = os.path.join(MODULE_BASE_DIR, DEFAULT_WEATHER_REL_PATH)
     soil_abs_path = os.path.join(MODULE_BASE_DIR, DEFAULT_SOIL_REL_PATH)
-    raw_weather_abs_path = os.path.join(MODULE_BASE_DIR, RAW_WEATHER_REL_PATH)
-
+    raw_weather_abs_path = os.path.join(MODULE_BASE_DIR, RAW_WEATHER_REL_PATH)    
+    
     try:
         conf = load_configuration()
         latitude = conf.get('lat', 0)
@@ -46,7 +46,7 @@ def profile_prep():
 
         if os.path.exists(raw_weather_abs_path):
             print(f"Loading existing raw weather data from: {raw_weather_abs_path}")
-            weather_df = pd.read_csv(raw_weather_abs_path)
+            weather_df = pd.read_csv(raw_weather_abs_path, sep=";")
         else:
             print(f"Raw weather data file missing at {raw_weather_abs_path}. Fetching and cleaning new data...")
             weather_df = fetch_weather_data(latitude, longitude, start_date_conf, end_date_conf)

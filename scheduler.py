@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime 
 from scipy.optimize import fmin
 from aquacrop import AquaCropModel, Soil, Crop, InitialWaterContent, IrrigationManagement
 from aquacrop.utils import prepare_weather
@@ -12,9 +13,9 @@ from iot_extra.profile_prep import profile_prep
 MODULE_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Define default relative paths for data files, relative to the module's directory
-DEFAULT_WEATHER_REL_PATH = "db/climate_data.txt"
-DEFAULT_SOIL_REL_PATH = "db/soil_data.csv"
-DEFAULT_OUTPUT_REL_PATH = "db/optimized_irr_schedule.csv"
+DEFAULT_WEATHER_REL_PATH = r"db\climate_data.txt"
+DEFAULT_SOIL_REL_PATH = r"db\soil_data.csv"
+DEFAULT_OUTPUT_REL_PATH = r"db\optimized_irr_schedule.csv"
 
 def _run_model_opt(
     smt_values, 
@@ -344,10 +345,12 @@ def generate_schedule(
     return optimal_smts, output_abs_csv_filepath
 
 if __name__ == '__main__':
+    
+    curr_yr = datetime.now().year
     # Do not change any params
     sim_parameters = {
-        "sim_start_date": '2022/01/01',
-        "sim_end_date": '2023/12/31',
+        "sim_start_date": f'{curr_yr}/01/01',
+        "sim_end_date": f'{curr_yr+1}/12/31',
         "plant_date": '11/15', 
         "crop_name": 'Potato',
         "soil_type": 'ClayLoam',
@@ -359,9 +362,9 @@ if __name__ == '__main__':
             'value': ["FC", "SAT", "WP", "WP"]
         },
         "irrigation_method": 1, 
-        "max_irr_season_for_optimization": 250.0, 
+        "max_irr_season_for_optimization": 200.0, 
         "num_smts_to_optimize": 4,
-        "num_searches_for_starting_point": 10 
+        "num_searches_for_starting_point": 5 
     }
 
     print("Starting schedule generation process...")
