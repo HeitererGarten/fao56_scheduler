@@ -26,28 +26,6 @@ This module is designed to assist with agricultural irrigation management using 
   * Helper modules for API interactions and data conversions are located in the `lib/` directory.
   * A Jupyter notebook (`prediction_model.ipynb`) provides an interactive environment for model exploration.
 
-## Directory Structure
-
-```text
-iot_extra/
-├── config.yaml                 # Main configuration (latitude, longitude, dates)
-├── profile_prep.py             # Script to fetch and prepare weather and soil data
-├── scheduler.py                # Script to optimize irrigation schedules
-├── prediction_model.ipynb      # Jupyter Notebook for model exploration and visualization
-├── README.md                   # This file
-├── requirements.txt            # Python package dependencies (to be generated)
-├── db/                         # Directory for data files
-│   ├── climate_data.txt        # Processed climate data for AquaCrop
-│   ├── soil_data.csv           # Processed soil data for AquaCrop
-│   ├── raw_weather_df.csv      # Intermediate raw weather data (example)
-│   └── optimized_irr_schedule.csv # Output from scheduler.py
-│   └── irr_schedule.csv        # Example output from prediction_model.ipynb
-└── lib/                        # Supporting library modules
-    ├── soil_api_client.py      # Client for fetching soil data
-    ├── weather_prep.py         # Utilities for weather data processing
-    └── ...                     # Other utility scripts
-```
-
 ## Basic Usage
 
 1. **Configuration**:
